@@ -1,0 +1,10 @@
+.searchContainer {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+
+  :global(.cds--search-input) {
+    width: 100%;
+  }
+}

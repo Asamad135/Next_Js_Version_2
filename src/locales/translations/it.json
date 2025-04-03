@@ -1,0 +1,18 @@
+{
+    "login": {
+      "welcomeMessage": "Benvenuto su IBM Intellisphere",
+      "title": "Accedi",
+      "email": "Email",
+      "emailHelper": "Inserisci la tua email",
+      "password": "Password",
+      "passwordHelper": "Inserisci la tua password",
+      "submit": "Accedi",
+      "forgotPassword": "Password dimenticata?",
+      "createAccount": "Crea un account",
+      "error": "Errore",
+      "success": "Successo",
+      "successMessage": "Accesso riuscito!",
+      "rememberMe": "Ricordami"
+    }
+  }
+  

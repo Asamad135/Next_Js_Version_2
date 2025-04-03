@@ -1,0 +1,13 @@
+.textInputWrapper {
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 400px;
+  
+  :global(.cds--text-input__field-wrapper) {
+    width: 100%;
+  }
+  
+  :global(.cds--text-input) {
+    width: 100%;
+  }
+}

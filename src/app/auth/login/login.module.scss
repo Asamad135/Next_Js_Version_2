@@ -1,0 +1,109 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/colors' as *;
+@use '@carbon/react/scss/theme' as *;
+
+.pageWrapper {
+  position: relative;
+  min-height: 100vh;
+  background-color: $layer-01;
+  padding: 0rem;
+}
+
+.languageSelector {
+  position: absolute;
+  top: $spacing-05;
+  right: $spacing-05;
+  z-index: 1000;
+}
+
+.notificationContainer {
+  position: fixed;
+  top: $spacing-05;
+  right: $spacing-07;
+  z-index: 1001;
+}
+
+.loginPage {
+  height: 100vh;
+  padding: $spacing-07;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginColumn {
+  margin: $spacing-08 auto;
+}
+
+.authContainer {
+  background-color: $layer-02;
+  border-radius: $spacing-03;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  padding: $spacing-06;
+  width: 100%;
+  max-width: 450px;
+  max-height: calc(100vh - #{$spacing-07 * 2});
+  overflow: auto;
+  margin: 0 auto;
+}
+
+.headerContainer {
+  margin-bottom: $spacing-07;
+}
+
+.logoSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-05;
+  
+  .logoWrapper {
+    flex-shrink: 0;
+  }
+  
+  .loginText {
+    @include type-style('heading-03');
+    color: $text-primary;
+  }
+}
+
+.welcomeText {
+  @include type-style('heading-02');
+  color: $text-secondary;
+  margin-top: $spacing-05;
+  text-align: center;
+}
+
+.formFields {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-04;
+  margin-bottom: $spacing-06;
+}
+
+.submitButton {
+  width: 100%;
+  margin-top: $spacing-05;
+}
+
+.errorMessage {
+  color: $support-error;
+  @include type-style('helper-text-01');
+  margin-bottom: $spacing-03;
+}
+
+.authLinks {
+  text-align: center;
+  margin-top: $spacing-05;
+  @include type-style('body-compact-01');
+  
+  a {
+    color: $link-primary;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

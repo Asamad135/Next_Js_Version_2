@@ -1,0 +1,18 @@
+{
+    "login": {
+      "welcomeMessage": "欢迎来到 IBM Intellisphere",
+      "title": "登录",
+      "email": "电子邮件",
+      "emailHelper": "输入您的电子邮件",
+      "password": "密码",
+      "passwordHelper": "输入您的密码",
+      "submit": "登录",
+      "forgotPassword": "忘记密码？",
+      "createAccount": "创建账户",
+      "error": "错误",
+      "success": "成功",
+      "successMessage": "登录成功！",
+      "rememberMe": "记住我"
+    }
+  }
+  

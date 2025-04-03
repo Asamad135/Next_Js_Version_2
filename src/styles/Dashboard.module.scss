@@ -1,0 +1,274 @@
+.dashboardContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  background: black !important;
+  width: 100%;
+  padding: 1rem 2rem !important;
+
+  .headerTitle {
+    color: white;
+    font-size: 1.5rem;
+    margin: 0;
+  }
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.buttonGroup {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.dashboardContent {
+  display: flex;
+  flex: 1;
+  align-items: center;  // Center vertically
+  justify-content: center;  // Center horizontally
+  padding-top: 2rem;
+  
+  main {
+    flex: 1;
+    padding: 1rem;
+    background: var(--cds-background);
+  }
+}
+
+.contentContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;  // Added this line
+  align-items: flex-start;
+  justify-content: flex-start;  // Changed to flex-start
+  padding: 2rem;
+  max-width: 100%;
+  margin: 0 auto;
+  width: 100%;
+  overflow-x: hidden;  // Added to prevent horizontal scrolling
+}
+
+.dashboardHeader {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #161616;
+  }
+}
+
+.dashboardTitle {
+  font-size: 2rem;
+  margin: 3rem 0 2rem;
+  color: var(--cds-text-primary);
+  padding: 0 2rem;
+  position: relative;
+
+  &:not(:first-child) {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--cds-border-subtle);
+  }
+}
+
+.module {
+  width: 100% !important;
+  height: 200px !important;
+  margin: 0 0.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 1rem !important;
+  padding: 2rem 3rem !important;
+  background: rgb(219, 214, 214) !important;
+  color: black !important;
+  position: relative !important;
+  overflow: hidden !important;
+  min-height: 200px !important;
+  padding: 2rem !important;
+  border: 2px solid black !important;  // Add black border
+  border-radius: 4px !important;       // Optional: adds rounded corners
+  transition: transform 0.2s;
+
+  svg {
+    width: 48px !important;
+    height: 48px !important;
+    position: relative;
+    z-index: 2;
+    transition: fill 0.3s ease;
+  }
+
+  h2 {
+    position: relative;
+    z-index: 2;
+    font-size: 1.5rem;
+    margin: 0;
+    transition: color 0.3s ease;
+    flex: 1;
+    text-align: center;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: blue;
+    transition: left 0.3s ease;
+    z-index: 1;
+  }
+
+  &:hover {
+    transform: scale(1.02);
+    color: white !important;
+    border-color: blue !important;     // Changes border color on hover
+    
+    svg {
+      fill: white !important;
+    }
+
+    &::before {
+      left: 0;
+    }
+  }
+}
+
+.authButton {
+//   margin: 0.5rem !important;
+  background: rgb(219, 214, 214) !important;
+  color: black !important;
+  border: none !important;
+  min-width: 100px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: blue;
+    transition: left 0.3s ease;
+    z-index: -1; // Changed from 0 to -1 to stay behind content
+  }
+
+  span {
+    position: relative;
+    z-index: 5; // Increased z-index to ensure visibility
+    transition: color 0.3s ease;
+  }
+
+  &:hover {
+    transform: scale(1.02);
+    color: white !important;
+    
+    &::before {
+      left: 0;
+    }
+
+    span {
+      color: white !important;
+      z-index: 5; // Match the span z-index
+    }
+  }
+}
+
+.themeButton {
+  background: transparent !important;
+  margin-right: 1rem !important;
+  padding: 0.5rem !important;
+  min-width: auto !important;
+  color: white !important;
+  
+  svg {
+    fill: white !important;
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+.themeIconLight {
+  fill: black;
+}
+
+.themeIconDark {
+  fill: white;
+}
+
+.archiveWrapper {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.pageTitle {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--cds-text-primary);
+}
+
+.pageDescription {
+  text-align: center;
+  color: var(--cds-text-secondary);
+  margin-bottom: 2rem;
+}
+
+.formStack {
+  width: 100%;
+}
+
+.formInput {
+  width: 100%;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: end;
+  margin-top: 1rem;
+}
+
+.submitButton {
+  min-width: 200px;
+  margin-bottom: 2rem;
+  text-align: end;
+}
+
+.formSection {
+  margin: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e0e0e0;
+  width: 100%;
+  // max-width: 800px;  // Added max-width for better form readability
+  margin: 0 auto;
+}
+
+.gridContainer {
+  width: 100%;  // Added this line
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+}

@@ -1,0 +1,18 @@
+{
+  "login": {
+    "welcomeMessage": "Welcome to IBM Intellisphere",
+    "title": "Login",
+    "email": "Email",
+    "emailHelper": "Enter your email",
+    "password": "Password",
+    "passwordHelper": "Enter your password",
+    "submit": "Sign In",
+    "forgotPassword": "Forgot Password?",
+    "createAccount": "Create account",
+    "error": "Error",
+    "success": "Success",
+    "successMessage": "Login successful!",
+    "rememberMe": "Remember me",
+    "errorMessage": "Invalid credentials, please try again."
+  }
+}

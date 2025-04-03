@@ -1,0 +1,18 @@
+{
+    "login": {
+      "welcomeMessage": "Welkom bij IBM Intellisphere",
+      "title": "Inloggen",
+      "email": "E-mail",
+      "emailHelper": "Voer uw e-mail in",
+      "password": "Wachtwoord",
+      "passwordHelper": "Voer uw wachtwoord in",
+      "submit": "Inloggen",
+      "forgotPassword": "Wachtwoord vergeten?",
+      "createAccount": "Account aanmaken",
+      "error": "Fout",
+      "success": "Succes",
+      "successMessage": "Succesvol ingelogd!",
+      "rememberMe": "Onthoud mij"
+    }
+  }
+  

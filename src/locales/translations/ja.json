@@ -1,0 +1,18 @@
+{
+    "login": {
+      "welcomeMessage": "IBM Intellisphere へようこそ",
+      "title": "ログイン",
+      "email": "メール",
+      "emailHelper": "メールアドレスを入力してください",
+      "password": "パスワード",
+      "passwordHelper": "パスワードを入力してください",
+      "submit": "ログイン",
+      "forgotPassword": "パスワードを忘れましたか？",
+      "createAccount": "アカウントを作成",
+      "error": "エラー",
+      "success": "成功",
+      "successMessage": "ログイン成功！",
+      "rememberMe": "ログイン状態を保持"
+    }
+  }
+  

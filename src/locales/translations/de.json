@@ -1,0 +1,18 @@
+{
+    "login": {
+      "welcomeMessage": "Willkommen bei IBM Intellisphere",
+      "title": "Anmelden",
+      "email": "E-Mail",
+      "emailHelper": "Geben Sie Ihre E-Mail ein",
+      "password": "Passwort",
+      "passwordHelper": "Geben Sie Ihr Passwort ein",
+      "submit": "Anmelden",
+      "forgotPassword": "Passwort vergessen?",
+      "createAccount": "Konto erstellen",
+      "error": "Fehler",
+      "success": "Erfolg",
+      "successMessage": "Anmeldung erfolgreich!",
+      "rememberMe": "Angemeldet bleiben"
+    }
+  }
+  
