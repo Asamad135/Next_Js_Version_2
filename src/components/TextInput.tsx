@@ -3,11 +3,11 @@ import { TextInput as CarbonTextInput } from '@carbon/react';
 import styles from './TextInput.module.scss';
 
 interface TextInputProps {
-  labelText: string;
-  placeholder?: string;
-  onChange: (value: string) => void;
-  value: string;
-  id?: string;
+  readonly labelText: string;
+  readonly placeholder?: string;
+  readonly onChange: (value: string) => void;
+  readonly value: string;
+  readonly id?: string;
 }
 
 export default function TextInput({ 

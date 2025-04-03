@@ -13,42 +13,42 @@ import {
   TabPanel,
   SkeletonPlaceholder,
 } from '@carbon/react';
-import { Star, DeliveryTruck, Certificate } from '@carbon/icons-react';
+import {Certificate} from '@carbon/icons-react';
 import styles from './ProductDetails.module.scss';
 
 interface ProductDetails {
-  id: number;
-  title: string;
-  thumbnail: string;
-  images: string[];
-  category: string;
-  brand: string;
-  price: number;
-  discountPercentage?: number;
-  description: string;
-  sku?: string;
-  stock: number;
-  dimensions?: {
-    width: number;
-    height: number;
-    depth: number;
+  readonly id: number;
+  readonly title: string;
+  readonly thumbnail: string;
+  readonly images: readonly string[];
+  readonly category: string;
+  readonly brand: string;
+  readonly price: number;
+  readonly discountPercentage?: number;
+  readonly description: string;
+  readonly sku?: string;
+  readonly stock: number;
+  readonly dimensions?: {
+    readonly width: number;
+    readonly height: number;
+    readonly depth: number;
   };
-  weight?: number;
-  warrantyInformation?: string;
-  shippingInformation?: string;
-  returnPolicy?: string;
-  rating: number;
-  reviews?: Array<{
-    reviewerName: string;
-    date: string;
-    rating: number;
-    comment: string;
+  readonly weight?: number;
+  readonly warrantyInformation?: string;
+  readonly shippingInformation?: string;
+  readonly returnPolicy?: string;
+  readonly rating: number;
+  readonly reviews?: ReadonlyArray<{
+    readonly reviewerName: string;
+    readonly date: string;
+    readonly rating: number;
+    readonly comment: string;
   }>;
 }
 
 interface PageProps {
-  params: {
-    id: string;
+  readonly params: {
+    readonly id: string;
   };
 }
 
@@ -60,17 +60,6 @@ export default function ProductDetails({ params }: PageProps) {
   const [imageLoading, setImageLoading] = useState<boolean>(true);
   const [thumbnailsLoading, setThumbnailsLoading] = useState<Record<string, boolean>>({});
 
-  const handleImageLoad = () => {
-    setImageLoading(false);
-  };
-
-  const handleThumbnailLoad = (imageUrl: string) => {
-    setThumbnailsLoading(prev => ({
-      ...prev,
-      [imageUrl]: false
-    }));
-  };
-
   useEffect(() => {
     if (!params?.id) return;
 
@@ -81,7 +70,7 @@ export default function ProductDetails({ params }: PageProps) {
       })
       .then((data: ProductDetails) => {
         setProduct(data);
-        setSelectedImage(data.thumbnail); // Set initial image
+        setSelectedImage(data.thumbnail);
         setLoading(false);
       })
       .catch(err => {
@@ -93,13 +82,12 @@ export default function ProductDetails({ params }: PageProps) {
   useEffect(() => {
     if (product?.thumbnail) {
       setImageLoading(true);
-      // Initialize loading states for thumbnails
       const initialLoadingState: Record<string, boolean> = {
         [product.thumbnail]: true,
-        ...(product.images?.reduce((acc, img) => ({
+        ...product.images.reduce((acc, img) => ({
           ...acc,
-          [img]: true
-        }), {}))
+          [img]: true,
+        }), {}),
       };
       setThumbnailsLoading(initialLoadingState);
     }
@@ -111,66 +99,48 @@ export default function ProductDetails({ params }: PageProps) {
 
   if (error || !product) {
     return (
-      <div>
-        <Tile>
-          <h1>Error</h1>
-          <p>{error || 'Product not found'}</p>
-        </Tile>
-      </div>
+      <Tile className={styles.errorTile}>
+        <h1>Error</h1>
+        <p>{error ?? 'Product not found'}</p>
+      </Tile>
     );
   }
 
   return (
     <div className={styles.container}>
       <Grid condensed>
-        {/* Main Product Section */}
         <Column sm={4} md={8} lg={16}>
           <Tile className={styles.mainTile}>
             <Grid condensed>
-              {/* Left Column - Images */}
               <Column sm={4} md={4} lg={8} className={styles.imageColumn}>
                 <div className={styles.mainImageContainer}>
-                  {imageLoading && (
-                    <SkeletonPlaceholder className={styles.imageSkeleton} />
-                  )}
-                  <img 
-                    src={selectedImage} 
-                    alt={product.title} 
+                  {imageLoading && <SkeletonPlaceholder className={styles.imageSkeleton} />}
+                  <img
+                    src={selectedImage}
+                    alt={product.title}
                     className={`${styles.mainImage} ${imageLoading ? styles.hidden : ''}`}
-                    onLoad={handleImageLoad}
+                    onLoad={() => setImageLoading(false)}
                   />
                 </div>
                 <div className={styles.thumbnailGrid}>
-                  <div className={styles.thumbnailWrapper}>
-                    {thumbnailsLoading[product.thumbnail] && (
-                      <SkeletonPlaceholder className={styles.thumbnailSkeleton} />
-                    )}
-                    <img 
-                      src={product.thumbnail}
-                      alt={`${product.title} thumbnail`}
-                      className={`${styles.thumbnail} ${selectedImage === product.thumbnail ? styles.selected : ''} ${thumbnailsLoading[product.thumbnail] ? styles.hidden : ''}`}
-                      onClick={() => setSelectedImage(product.thumbnail)}
-                      onLoad={() => handleThumbnailLoad(product.thumbnail)}
-                    />
-                  </div>
-                  {product.images?.map((img, index) => (
-                    <div key={index} className={styles.thumbnailWrapper}>
-                      {thumbnailsLoading[img] && (
-                        <SkeletonPlaceholder className={styles.thumbnailSkeleton} />
-                      )}
-                      <img 
+                  {[product.thumbnail, ...product.images].map((img) => (
+                    <button
+                      key={img}
+                      className={styles.thumbnailButton}
+                      onClick={() => setSelectedImage(img)}
+                      onKeyDown={(e) => e.key === 'Enter' && setSelectedImage(img)}
+                    >
+                      {thumbnailsLoading[img] && <SkeletonPlaceholder className={styles.thumbnailSkeleton} />}
+                      <img
                         src={img}
-                        alt={`${product.title} view ${index + 1}`}
+                        alt={product.title}
                         className={`${styles.thumbnail} ${selectedImage === img ? styles.selected : ''} ${thumbnailsLoading[img] ? styles.hidden : ''}`}
-                        onClick={() => setSelectedImage(img)}
-                        onLoad={() => handleThumbnailLoad(img)}
+                        onLoad={() => setThumbnailsLoading(prev => ({ ...prev, [img]: false }))}
                       />
-                    </div>
+                    </button>
                   ))}
                 </div>
               </Column>
-
-              {/* Right Column - Product Info */}
               <Column sm={4} md={4} lg={8} className={styles.infoColumn}>
                 <div className={styles.productHeader}>
                   <h1 className={styles.productTitle}>{product.title}</h1>
@@ -179,95 +149,47 @@ export default function ProductDetails({ params }: PageProps) {
                     <Tag type="green">{product.brand}</Tag>
                   </div>
                 </div>
-
                 <div className={styles.priceSection}>
                   <div className={styles.price}>${product.price}</div>
-                  {product.discountPercentage && (
-                    <Tag type="red">{product.discountPercentage}% OFF</Tag>
-                  )}
+                  {product.discountPercentage && <Tag type="red">{product.discountPercentage}% OFF</Tag>}
                 </div>
-
                 <p className={styles.description}>{product.description}</p>
-
-                <div className={styles.basicDetails}>
-                  <div className={styles.detailItem}>
-                    <strong>SKU:</strong> {product.sku}
-                  </div>
-                  <div className={styles.detailItem}>
-                    <strong>Stock:</strong> {product.stock} units
-                  </div>
-                </div>
               </Column>
             </Grid>
           </Tile>
-        </Column>
-
-        {/* Information Tabs Section */}
-        <Column sm={4} md={8} lg={16}>
-          <Tile className={styles.infoTabs}>
-            <Tabs>
-              <TabList aria-label="Product Information">
-                <Tab>Specifications</Tab>
-                <Tab>Shipping</Tab>
-                <Tab>Reviews</Tab>
-              </TabList>
-              <TabPanels>
-                <TabPanel>
-                  <div className={styles.specGrid}>
-                    {product.dimensions && (
-                      <div className={styles.specItem}>
-                        <strong>Dimensions:</strong>
-                        <p>{`${product.dimensions.width} × ${product.dimensions.height} × ${product.dimensions.depth}`}</p>
-                      </div>
-                    )}
-                    {product.weight && (
-                      <div className={styles.specItem}>
-                        <strong>Weight:</strong>
-                        <p>{product.weight} kg</p>
-                      </div>
-                    )}
-                    {product.warrantyInformation && (
-                      <div className={styles.specItem}>
-                        <strong>Warranty:</strong>
-                        <p>{product.warrantyInformation}</p>
-                      </div>
-                    )}
-                  </div>
-                </TabPanel>
-                <TabPanel>
-                  <div className={styles.shippingInfo}>
-                    <DeliveryTruck size={32} />
-                    <h4>Shipping Information</h4>
-                    <p>{product.shippingInformation}</p>
-                    <Certificate size={32} />
-                    <h4>Return Policy</h4>
-                    <p>{product.returnPolicy}</p>
-                  </div>
-                </TabPanel>
-                <TabPanel>
-                  <div className={styles.reviewSection}>
-                    <div className={styles.overallRating}>
-                      <Star size={32} />
-                      <h2>{product.rating}</h2>
-                      <p>out of 5</p>
+          <Tabs>
+            <TabList>
+              <Tab>Specifications</Tab>
+              <Tab>Shipping</Tab>
+              <Tab>Reviews</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                {product.dimensions && <p><strong>Dimensions:</strong> {product.dimensions.width} &times; {product.dimensions.height} &times; {product.dimensions.depth}</p>}
+                {product.weight && <p><strong>Weight:</strong> {product.weight} kg</p>}
+                {product.warrantyInformation && <p><strong>Warranty:</strong> {product.warrantyInformation}</p>}
+              </TabPanel>
+              <TabPanel>
+                <p><strong>Shipping Information:</strong> {product.shippingInformation ?? 'No shipping information available'}</p>
+                <Certificate size={32} />
+                <h4>Return Policy</h4>
+                <p>{product.returnPolicy}</p>
+              </TabPanel>
+              <TabPanel>
+                {product.reviews && product.reviews.length > 0 ? (
+                  product.reviews.map((review) => (
+                    <div key={review.reviewerName} className={styles.review}>
+                      <strong>{review.reviewerName}</strong>
+                      <p>{review.comment}</p>
+                      <p>Rating: {review.rating} / 5</p>
                     </div>
-                    {product.reviews?.map((review, index) => (
-                      <div key={index} className={styles.review}>
-                        <div className={styles.reviewHeader}>
-                          <strong>{review.reviewerName}</strong>
-                          <span>{new Date(review.date).toLocaleDateString()}</span>
-                        </div>
-                        <div className={styles.rating}>
-                          {'★'.repeat(review.rating)}{'☆'.repeat(5-review.rating)}
-                        </div>
-                        <p>{review.comment}</p>
-                      </div>
-                    ))}
-                  </div>
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          </Tile>
+                  ))
+                ) : (
+                  <p>No reviews available.</p>
+                )}
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
         </Column>
       </Grid>
     </div>

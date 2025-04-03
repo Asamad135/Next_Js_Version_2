@@ -1,14 +1,15 @@
 'use client'
-import { ReactNode } from 'react';
+import { ReactNode,useState} from 'react';
 import { Header, HeaderGlobalBar, Button } from '@carbon/react';
 import { AsleepFilled, LightFilled } from '@carbon/icons-react';
 import styles from '@/styles/Dashboard.module.scss';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+
 
 interface DashboardLayoutProps {
-  children: ReactNode;
+  readonly children: ReactNode;
 }
+
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   let router = useRouter();

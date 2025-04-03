@@ -2,9 +2,9 @@
 import { Select, SelectItem } from '@carbon/react';
 
 interface DropdownProps {
-  items: string[];
-  onChange: (value: string) => void;
-  label?: string;
+  readonly items: readonly string[];
+  readonly onChange: (value: string) => void;
+  readonly label?: string;
 }
 
 export default function Dropdown({ items, onChange, label = "Select an option" }: DropdownProps) {

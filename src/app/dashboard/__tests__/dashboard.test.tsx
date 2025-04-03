@@ -1,36 +1,48 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { jest, describe } from '@jest/globals';
+import { jest, describe, beforeEach, expect, it } from '@jest/globals';
 import Dashboard from '../page';
 
-// Mock the scss module
+// Mock the SCSS module
 jest.mock('@/styles/Dashboard.module.scss', () => ({
   dashboardContainer: 'mock-dashboard-container',
   fileOperations: 'mock-file-operations',
-  administration: 'mock-administration'
+  administration: 'mock-administration',
 }));
 
 // Define types for mocked components
 type MockComponentProps = {
-  children?: React.ReactNode;
-  onClick?: () => void;
-  className?: string;
-};
+    children?: React.ReactNode;
+    className?: string;
+  };
+  
+  // Define type for Button separately since it uses onClick
+  type MockButtonProps = {
+    children?: React.ReactNode;
+    onClick?: () => void;
+    className?: string;
+  };
 
-// Mock Carbon components with proper types
+// Mock Carbon components with proper types and props handling
 jest.mock('@carbon/react', () => ({
-  Content: ({ children }: MockComponentProps) => (
-    <div data-testid="content">{children}</div>
+  Content: ({ children, className }: MockComponentProps) => (
+    <div data-testid="content" className={className}>
+      {children}
+    </div>
   ),
-  Grid: ({ children }: MockComponentProps) => (
-    <div data-testid="grid">{children}</div>
+  Grid: ({ children, className }: MockComponentProps) => (
+    <div data-testid="grid" className={className}>
+      {children}
+    </div>
   ),
-  Column: ({ children }: MockComponentProps) => (
-    <div data-testid="column">{children}</div>
+  Column: ({ children, className }: MockComponentProps) => (
+    <div data-testid="column" className={className}>
+      {children}
+    </div>
   ),
-  Button: ({ children, onClick }: MockComponentProps) => (
-    <button data-testid="button" onClick={onClick}>
+  Button: ({ children, onClick, className }: MockComponentProps) => (
+    <button data-testid="button" onClick={onClick} className={className}>
       {children}
     </button>
   ),
@@ -68,16 +80,9 @@ describe('Dashboard', () => {
 
   it('renders all buttons with correct text', () => {
     render(<Dashboard />);
-    const buttonTexts = [
-      'Archive',
-      'Extract',
-      'Delete',
-      'Convert/Compare',
-      'Manage Users',
-      'Options'
-    ];
+    const buttonTexts = ['Archive', 'Extract', 'Delete', 'Convert/Compare', 'Manage Users', 'Options'];
 
-    buttonTexts.forEach(text => {
+    buttonTexts.forEach((text) => {
       expect(screen.getByText(text)).toBeInTheDocument();
     });
   });
@@ -105,11 +110,6 @@ describe('Dashboard', () => {
       expect(mockPush).toHaveBeenCalledWith('/dashboard/delete');
     });
 
-    // it('navigates to users page', () => {
-    //   render(<Dashboard />);
-    //   fireEvent.click(screen.getByText('Manage Users'));
-    //   expect(mockPush).toHaveBeenCalledWith('/dashboard/users');
-    // });
 
     it('navigates to settings page', () => {
       render(<Dashboard />);

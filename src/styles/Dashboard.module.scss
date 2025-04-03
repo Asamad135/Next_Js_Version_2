@@ -100,7 +100,6 @@
   position: relative !important;
   overflow: hidden !important;
   min-height: 200px !important;
-  padding: 2rem !important;
   border: 2px solid black !important;  // Add black border
   border-radius: 4px !important;       // Optional: adds rounded corners
   transition: transform 0.2s;
@@ -151,7 +150,6 @@
 }
 
 .authButton {
-//   margin: 0.5rem !important;
   background: rgb(219, 214, 214) !important;
   color: black !important;
   border: none !important;
@@ -259,7 +257,6 @@
 }
 
 .formSection {
-  margin: 2rem;
   padding-top: 2rem;
   border-top: 1px solid #e0e0e0;
   width: 100%;

@@ -3,7 +3,7 @@ import { Search, Button } from '@carbon/react';
 import styles from './SearchInput.module.scss';
 
 interface SearchInputProps {
-  onSearch: (searchTerm: string) => void;
+  readonly onSearch: (searchTerm: string) => void;
 }
 
 export default function SearchInput({ onSearch }: SearchInputProps) {
@@ -25,7 +25,7 @@ export default function SearchInput({ onSearch }: SearchInputProps) {
         size="lg"
         placeholder="Search..."
         labelText="Search"
-        onKeyPress={handleSearch}
+        onKeyDown={handleSearch}
       />
       <Button onClick={handleSearch}>Search</Button>
     </div>

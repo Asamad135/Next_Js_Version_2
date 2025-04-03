@@ -1,10 +1,8 @@
 'use client';
-import { Provider } from 'react-redux';
-import { store } from '@/redux/store';
-import { ReactNode, useEffect, useState } from 'react';
-import { I18nextProvider } from 'react-i18next';
+
+import { ReactNode} from 'react';
+import { I18nextProvider,initReactI18next } from 'react-i18next';
 import i18next from 'i18next';
-import { initReactI18next } from 'react-i18next';
 import enTranslations from '@/locales/translations/en.json';
 import esTranslations from '@/locales/translations/es.json';
 import frTranslations from '@/locales/translations/fr.json';
@@ -41,9 +39,9 @@ i18next
     },
   });
 
-interface ProvidersProps {
-  children: ReactNode;
-}
+  interface ProvidersProps {
+    readonly children: ReactNode;
+  }
 
 export function Providers({ children }: ProvidersProps) {
   return (

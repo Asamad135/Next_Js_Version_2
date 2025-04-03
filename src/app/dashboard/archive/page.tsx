@@ -121,12 +121,6 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function Archive() {
-  const initialValues: FormValues = {
-    sourcePath: '',
-    destinationPath: '',
-    archiveType: 'zip'
-  };
-
   const [tableRows, setTableRows] = useState<ArchiveRow[]>(initialRows);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedRowsForDelete, setSelectedRowsForDelete] = useState<ArchiveRow[]>([]);
@@ -170,7 +164,7 @@ export default function Archive() {
       case 'download':
         selectedRows.forEach(row => {
           const link = document.createElement('a');
-          const filename = row.destinationPath.split('/').pop() || '';
+          const filename = row.destinationPath.split('/').pop() ?? '';
           link.download = filename;
           link.href = `data:application/octet-stream;base64,${btoa('Sample archive content')}`;
           document.body.appendChild(link);
