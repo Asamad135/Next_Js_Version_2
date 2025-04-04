@@ -4,6 +4,7 @@ import '@testing-library/jest-dom';
 import { jest, describe, beforeEach, expect, it } from '@jest/globals';
 import Dashboard from '../page';
 
+
 // Mock the SCSS module
 jest.mock('@/styles/Dashboard.module.scss', () => ({
   dashboardContainer: 'mock-dashboard-container',

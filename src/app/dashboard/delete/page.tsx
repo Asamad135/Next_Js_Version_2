@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react';
-import { Content } from '@carbon/react';
+import { Content,Button} from '@carbon/react';
 import SearchInput from '@/components/SearchInput';
 import TextInput from '@/components/TextInput';
 import Dropdown from '@/components/Dropdown';
@@ -86,7 +86,13 @@ export default function DeleteModule() {
         
         <div className={deleteStyles.controlsSection}>
           <div className={deleteStyles.fullWidth}>
-            <SearchInput onSearch={handleSearch} />
+            <SearchInput 
+              onSearch={handleSearch}
+              button={<Button onClick={() => handleSearch((document.querySelector('input[type="text"]') as HTMLInputElement)?.value || '')}>Search</Button>}
+            />
+             <SearchInput 
+              onSearch={handleSearch}
+            />
           </div>
           
           <TextInput

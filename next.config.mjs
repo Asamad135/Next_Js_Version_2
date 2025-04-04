@@ -4,7 +4,7 @@ const nextConfig = {
   sassOptions: {
     includePaths: ['./src/styles'],
   },
-  // Add any other existing config options here
+
 };
 
 export default nextConfig;
